@@ -1,6 +1,5 @@
-import { fireEvent, prettyDOM, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Input from "../input";
-import { useState } from "react";
 
 describe("Input", () => {
   it("should render input", () => {

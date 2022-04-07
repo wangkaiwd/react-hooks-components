@@ -1,19 +1,30 @@
-import React, { InputHTMLAttributes, useMemo } from 'react';
-import cls from 'classnames';
+import React, { FormEvent, InputHTMLAttributes, useMemo, useRef } from "react";
+import cls from "classnames";
+import "./input.scss";
 
+// @ts-ignore
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   allowClear?: boolean;
+  onChange?: (value: string) => void;
 }
 
 const Input: React.FC<Props> = (props) => {
-  const { className, allowClear, ...nativeProps } = props;
+  const { className, allowClear, onChange, ...nativeProps } = props;
+  const inputRef = useRef<HTMLInputElement>(null!);
   const classes = useMemo(() => {
-    return cls('ant-input', className, { clear: allowClear });
+    return cls("ant-input", className, { clear: allowClear });
   }, [className, allowClear]);
+  const onClear = () => {
+    inputRef.current.value = "";
+    onChange?.(inputRef.current.value);
+  };
+  const onInput = (e: FormEvent) => {
+    onChange?.((e.target as HTMLInputElement).value);
+  };
   return (
     <div className={classes}>
-      <input {...nativeProps}/>
-      <div className="ant-input-clear">
+      <input data-testid="input" ref={inputRef} {...nativeProps} onInput={onInput} />
+      <div data-testid="clear" className="ant-input-clear" onClick={onClear}>
         x
       </div>
     </div>

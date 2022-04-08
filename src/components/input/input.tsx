@@ -1,4 +1,4 @@
-import React, { FormEvent, InputHTMLAttributes, useMemo, useRef } from "react";
+import React, { FormEvent, InputHTMLAttributes, useRef } from "react";
 import cls from "classnames";
 import "./input.scss";
 

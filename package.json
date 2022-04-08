@@ -36,6 +36,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-test-renderer": "^17.0.1",
+    "react-test-renderer": "^17.0.0",
     "sass": "^1.49.11"
   }
 }

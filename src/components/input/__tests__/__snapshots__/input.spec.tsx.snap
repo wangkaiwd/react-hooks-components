@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input should render correctly 1`] = `
+<div
+  className="ant-input"
+>
+  <input
+    data-testid="input"
+    onInput={[Function]}
+    placeholder="Please input something..."
+  />
+  <div
+    className="ant-input-clear"
+    data-testid="clear"
+    onClick={[Function]}
+  >
+    x
+  </div>
+</div>
+`;

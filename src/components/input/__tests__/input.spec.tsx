@@ -20,10 +20,17 @@ describe('Input', () => {
     const onChange = jest.fn();
     render(<Input onChange={onChange}/>);
     const input = screen.getByTestId('input');
+    // only need to trigger input event
     fireEvent.input(input, { target: { value: '10' } });
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith('10');
   });
   it('should support all attributes of native input', () => {
+    const placeholder = 'Please input';
+    const maxLength = 10;
+    const { container } = render(<Input placeholder={placeholder} maxLength={maxLength}/>);
+    const input = container.querySelector('input');
+    expect(input?.getAttribute('placeholder')).toBe(placeholder);
+    expect(input?.getAttribute('maxlength')).toBe(String(maxLength));
   });
 });

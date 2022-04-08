@@ -6,7 +6,7 @@
   }
   &.clear {
     input {
-      padding-right: 12px;
+      padding-right: 18px;
     }
   }
   .ant-input-clear {
@@ -14,5 +14,6 @@
     top: 50%;
     right: 3px;
     transform: translateY(-50%);
+    cursor: pointer;
   }
 }

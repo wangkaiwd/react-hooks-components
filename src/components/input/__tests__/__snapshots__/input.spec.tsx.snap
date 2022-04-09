@@ -6,6 +6,7 @@ exports[`Input should render correctly 1`] = `
 >
   <input
     data-testid="input"
+    onChange={[Function]}
     placeholder="Please input something..."
   />
 </div>

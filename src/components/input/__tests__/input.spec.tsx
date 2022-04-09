@@ -8,11 +8,10 @@ describe("Input", () => {
     expect(input).toMatchSnapshot();
   });
   it("should clear text within input", () => {
-    const onChange = jest.fn();
-    render(<Input onChange={onChange} value="20" />);
+    render(<Input allowClear defaultValue="20" />);
     fireEvent.click(screen.getByTestId("clear"));
-    expect(onChange).toBeCalledTimes(1);
     expect(screen.getByTestId("input")).toHaveValue("");
+    expect(screen.queryByTestId("clear")).toBeNull();
   });
   it("should trigger change with parameter value", () => {
     const onChange = jest.fn();

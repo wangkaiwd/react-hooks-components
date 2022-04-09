@@ -3,10 +3,23 @@ import AutoComplete from "../auto-complete";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const dataSource = [{ id: 1, label: "1433" }, { id: 2, label: "2" }];
-const setup = () => render(<AutoComplete dataSource={dataSource} />);
+const setup = () => {
+  const onChange = jest.fn();
+  const wrapper = render(<AutoComplete value="" onChange={onChange} dataSource={dataSource} />);
+  return {
+    ...wrapper,
+    onChange
+  };
+};
 describe("AutoComplete:", () => {
   it("should render correctly", () => {
-    const tree = renderer.create(<AutoComplete dataSource={[{ id: 1, label: "1" }]} />).toJSON();
+    const tree = renderer.create(
+      <AutoComplete
+        value=""
+        onChange={() => {}}
+        dataSource={[{ id: 1, label: "1" }]}
+      />
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("should display list when input focus", () => {

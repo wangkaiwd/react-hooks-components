@@ -13,3 +13,5 @@ component `props` extends `DOM` element native attributes and also can override 
 
 * [React's onChange relates to onInput](https://github.com/facebook/react/issues/3964)
   * [onChange](https://reactjs.org/docs/dom-elements.html#onchange)
+* [support controlled and uncontrolled component](https://github.com/react-component/input/blob/e6c1481aadf47026cf88148227cc262af077687e/src/Input.tsx#L42)
+  * useMergedState

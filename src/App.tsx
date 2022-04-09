@@ -1,5 +1,6 @@
-import React from "react";
-import AutoComplete from "./components/auto-complete/auto-complete";
+import React, { useState } from "react";
+// import AutoComplete from "./components/auto-complete/auto-complete";
+import Input from "./components/input/input";
 
 const initialDataSource = [
   {
@@ -45,10 +46,10 @@ const initialDataSource = [
 ];
 
 function App () {
-
   return (
     <div className="App">
-      <AutoComplete dataSource={initialDataSource} />
+      {/*<AutoComplete dataSource={initialDataSource} />*/}
+      <Input allowClear />
     </div>
   );
 }

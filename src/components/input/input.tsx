@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, InputHTMLAttributes, useRef } from "react";
+import React, { ChangeEvent, MouseEvent, InputHTMLAttributes, useRef, useState, useEffect } from "react";
 import cls from "classnames";
 import "./input.scss";
 
@@ -10,10 +10,16 @@ const isEmpty = (value: any): boolean => {
   return value == null || value === "";
 };
 const Input: React.FC<Props> = (props) => {
-  const { className, allowClear, ...nativeProps } = props;
+  const { className, allowClear, onChange, defaultValue, ...nativeProps } = props;
+  const getValue = () => !isEmpty(props.value) ? props.value : defaultValue;
+  const [value, setValue] = useState(getValue);
   const inputRef = useRef<HTMLInputElement>(null);
   const classes = cls("ant-input", className, { clear: allowClear });
-  const hasContent = !isEmpty(nativeProps.value) || !isEmpty(inputRef.current?.value);
+  // this will lead to render again
+  // first render also fire
+  useEffect(() => {
+    setValue(getValue);
+  }, [defaultValue, props.value]);
   const onClear = (e: MouseEvent<HTMLDivElement>) => {
     if (inputRef.current) {
       const event = Object.create(e, {
@@ -22,18 +28,26 @@ const Input: React.FC<Props> = (props) => {
         currentTarget: { value: inputRef.current }
       });
       inputRef.current.value = "";
-      nativeProps.onChange?.(event as ChangeEvent<HTMLInputElement>);
+      setValue("");
+      onChange?.(event as ChangeEvent<HTMLInputElement>);
     }
   };
   const getClear = () => {
-    return hasContent && allowClear &&
+    return allowClear && !isEmpty(value) &&
       <div data-testid="clear" className="ant-input-clear" onClick={onClear}>
         ✖
       </div>;
   };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (inputRef.current) {
+      const value = e.target.value;
+      setValue(value);
+    }
+    onChange?.(e);
+  };
   return (
     <div className={classes}>
-      <input data-testid="input" ref={inputRef} {...nativeProps} />
+      <input data-testid="input" {...nativeProps} onChange={handleChange} value={value} ref={inputRef} />
       {getClear()}
     </div>
   );

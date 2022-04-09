@@ -6,15 +6,7 @@ exports[`Input should render correctly 1`] = `
 >
   <input
     data-testid="input"
-    onInput={[Function]}
     placeholder="Please input something..."
   />
-  <div
-    className="ant-input-clear"
-    data-testid="clear"
-    onClick={[Function]}
-  >
-    x
-  </div>
 </div>
 `;

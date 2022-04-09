@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AutoComplete: should render correctly 1`] = `
+<div
+  className="ant-auto-complete"
+>
+  <div
+    className="ant-input"
+  >
+    <input
+      data-testid="input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="Please input something..."
+    />
+  </div>
+</div>
+`;

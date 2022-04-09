@@ -41,7 +41,7 @@ const AutoComplete: FC<Props> = (props) => {
       {
         visible &&
         <div className="ant-auto-complete-popover">
-          <ul>
+          <ul data-testid="popover">
             {generateList()}
           </ul>
         </div>

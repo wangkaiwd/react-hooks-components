@@ -25,15 +25,16 @@ const Input: React.FC<Props> = (props) => {
       nativeProps.onChange?.(event as ChangeEvent<HTMLInputElement>);
     }
   };
+  const getClear = () => {
+    return hasContent && allowClear &&
+      <div data-testid="clear" className="ant-input-clear" onClick={onClear}>
+        ✖
+      </div>;
+  };
   return (
     <div className={classes}>
       <input data-testid="input" ref={inputRef} {...nativeProps} />
-      {
-        hasContent &&
-        <div data-testid="clear" className="ant-input-clear" onClick={onClear}>
-          ✖
-        </div>
-      }
+      {getClear()}
     </div>
   );
 };

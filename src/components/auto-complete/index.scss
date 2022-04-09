@@ -1,0 +1,10 @@
+.ant-auto-complete {
+  position: relative;
+  display: inline-block;
+  &-popover {
+    top: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: pink;
+  }
+}

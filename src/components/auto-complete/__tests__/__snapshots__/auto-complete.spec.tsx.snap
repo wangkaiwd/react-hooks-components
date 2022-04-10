@@ -12,6 +12,7 @@ exports[`AutoComplete: should render correctly 1`] = `
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
+      value=""
     />
   </div>
 </div>

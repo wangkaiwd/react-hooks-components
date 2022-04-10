@@ -11,7 +11,15 @@ const isEmpty = (value: any): boolean => {
 };
 const Input: React.FC<Props> = (props) => {
   const { className, allowClear, onChange, defaultValue, ...nativeProps } = props;
-  const getValue = () => !isEmpty(props.value) ? props.value : defaultValue;
+  const getValue = () => {
+    if (!isEmpty(props.value)) {
+      return props.value;
+    }
+    if (!isEmpty(props.defaultValue)) {
+      return props.defaultValue;
+    }
+    return "";
+  };
   const [value, setValue] = useState(getValue);
   const inputRef = useRef<HTMLInputElement>(null);
   const classes = cls("ant-input", className, { clear: allowClear });

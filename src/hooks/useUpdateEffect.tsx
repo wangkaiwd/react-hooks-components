@@ -1,4 +1,4 @@
-import { DependencyList, EffectCallback, useEffect, useRef } from "react";
+import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 
 const useUpdateEffect = (effect: EffectCallback, deps: DependencyList) => {
   const isFirst = useRef(true);
@@ -8,7 +8,7 @@ const useUpdateEffect = (effect: EffectCallback, deps: DependencyList) => {
     } else {
       isFirst.current = false;
     }
-  }, [deps]);
+  }, deps);
 };
 
 export default useUpdateEffect;

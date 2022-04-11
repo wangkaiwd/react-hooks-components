@@ -1,6 +1,7 @@
 import React, { ChangeEvent, MouseEvent, InputHTMLAttributes, useRef, useState, useEffect } from 'react';
 import cls from 'classnames';
 import './input.scss';
+import useUpdateEffect from '../../hooks/useUpdateEffect';
 
 const prefixCls = 'ant-input';
 
@@ -17,8 +18,8 @@ const Input: React.FC<Props> = (props) => {
     if (!isEmpty(props.value)) {
       return props.value;
     }
-    if (!isEmpty(props.defaultValue)) {
-      return props.defaultValue;
+    if (!isEmpty(defaultValue)) {
+      return defaultValue;
     }
     return '';
   };
@@ -27,8 +28,8 @@ const Input: React.FC<Props> = (props) => {
   const classes = cls(prefixCls, className, { clear: allowClear });
   // this will lead to render again
   // first render also fire
-  useEffect(() => {
-    setValue(getValue);
+  useUpdateEffect(() => {
+    setValue(getValue());
   }, [defaultValue, props.value]);
   const onClear = (e: MouseEvent<HTMLDivElement>) => {
     if (inputRef.current) {

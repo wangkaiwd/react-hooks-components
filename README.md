@@ -9,7 +9,6 @@ Plan to implement following components:
 * Menu
 * Form
 * Tree
-* Table
 * UpPullRefresh/DownPullMore
 * VirtualList
 

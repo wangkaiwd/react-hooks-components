@@ -1,13 +1,15 @@
-import React, { ChangeEvent, MouseEvent, InputHTMLAttributes, useRef, useState, useEffect } from "react";
-import cls from "classnames";
-import "./input.scss";
+import React, { ChangeEvent, MouseEvent, InputHTMLAttributes, useRef, useState, useEffect } from 'react';
+import cls from 'classnames';
+import './input.scss';
+
+const prefixCls = 'ant-input';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   allowClear?: boolean;
 }
 
 const isEmpty = (value: any): boolean => {
-  return value == null || value === "";
+  return value == null || value === '';
 };
 const Input: React.FC<Props> = (props) => {
   const { className, allowClear, onChange, defaultValue, ...nativeProps } = props;
@@ -18,11 +20,11 @@ const Input: React.FC<Props> = (props) => {
     if (!isEmpty(props.defaultValue)) {
       return props.defaultValue;
     }
-    return "";
+    return '';
   };
   const [value, setValue] = useState(getValue);
   const inputRef = useRef<HTMLInputElement>(null);
-  const classes = cls("ant-input", className, { clear: allowClear });
+  const classes = cls(prefixCls, className, { clear: allowClear });
   // this will lead to render again
   // first render also fire
   useEffect(() => {
@@ -35,8 +37,8 @@ const Input: React.FC<Props> = (props) => {
         target: { value: inputRef.current },
         currentTarget: { value: inputRef.current }
       });
-      inputRef.current.value = "";
-      setValue("");
+      inputRef.current.value = '';
+      setValue('');
       onChange?.(event as ChangeEvent<HTMLInputElement>);
     }
   };
@@ -55,7 +57,13 @@ const Input: React.FC<Props> = (props) => {
   };
   return (
     <div className={classes}>
-      <input data-testid="input" {...nativeProps} onChange={handleChange} value={value} ref={inputRef} />
+      <input
+        data-testid="input"
+        {...nativeProps}
+        onChange={handleChange}
+        value={value}
+        ref={inputRef}
+      />
       {getClear()}
     </div>
   );

@@ -6,6 +6,7 @@ import { MenuContext } from './menu';
 interface MenuItemProps {
   className?: string;
   id: string;
+  level: number;
 }
 
 const prefixCls = 'ant-menu-item';
@@ -18,7 +19,7 @@ const MenuItem: FC<MenuItemProps> = (props) => {
   };
   const classNames = cls(prefixCls, className, { selected: selectedKey === id });
   return (
-    <div className={classNames} onClick={onClick}>
+    <div className={classNames} onClick={onClick} style={{ paddingLeft: `${props.level * 10}px` }}>
       {props.children}
     </div>
   );

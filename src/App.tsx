@@ -70,6 +70,12 @@ const menuList = [
       {
         key: '2-2',
         title: 'option 2-2',
+        children: [
+          {
+            key: '2-2-1',
+            title: 'option 2-2-1',
+          }
+        ]
       }
     ]
   },
@@ -81,17 +87,17 @@ const menuList = [
 
 function App () {
   const [selectedKey, setSelectedKey] = useState('');
-  const getMenus = (menus: any) => {
+  const getMenus = (menus: any, level = 1) => {
     return menus.map((menu: any) => {
       if (menu.children) {
         return (
           <SubMenu key={menu.key} id={menu.key} title={menu.title}>
             {/* can recognize different content versus vue named slots ? */}
-            {getMenus(menu.children)}
+            {getMenus(menu.children, level + 1)}
           </SubMenu>
         );
       }
-      return <MenuItem key={menu.key} id={menu.key}>{menu.title}</MenuItem>;
+      return <MenuItem key={menu.key} id={menu.key} level={level}>{menu.title}</MenuItem>;
     });
   };
   return (

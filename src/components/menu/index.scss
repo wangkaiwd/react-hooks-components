@@ -5,10 +5,11 @@
 .ant-sub-menu {
   &-title {
     cursor: pointer;
+    padding: 6px 10px;
   }
 
   &-children {
-    padding-left: 10px;
+    //padding-left: 10px;
   }
 }
 

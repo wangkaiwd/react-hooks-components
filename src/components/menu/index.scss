@@ -1,0 +1,22 @@
+.ant-menu {
+  display: inline-block;
+}
+
+.ant-sub-menu {
+  &-title {
+    cursor: pointer;
+  }
+
+  &-children {
+    padding-left: 10px;
+  }
+}
+
+.ant-menu-item {
+  cursor: pointer;
+  padding: 6px 10px;
+
+  &.selected {
+    background-color: pink;
+  }
+}

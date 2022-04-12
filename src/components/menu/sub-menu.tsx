@@ -13,7 +13,7 @@ export const PathTrackerContext = createContext<string[]>([]);
 const prefixCls = 'ant-sub-menu';
 const SubMenu: FC<SubMenuProps> = (props) => {
   const pathTracker = useContext(PathTrackerContext);
-  const { id } = props;
+  const { id, className } = props;
   const { inlineIndent = 24, onOpenChange, openedKeys } = useContext(MenuContext);
   const isOpen = openedKeys?.includes(String(id));
   const nextPathTracker = pathTracker.concat(String(props.id));
@@ -30,7 +30,7 @@ const SubMenu: FC<SubMenuProps> = (props) => {
   };
   return (
     <PathTrackerContext.Provider value={nextPathTracker}>
-      <div className={cls(prefixCls)}>
+      <div className={cls(prefixCls, className)}>
         <div
           className={`${prefixCls}-title`}
           onClick={onClickTitle}

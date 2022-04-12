@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu should render correctly 1`] = `
+<div
+  className="ant-menu"
+>
+  <div
+    className="ant-sub-menu test-1"
+  >
+    <div
+      className="ant-sub-menu-title"
+      onClick={[Function]}
+      style={
+        Object {
+          "paddingLeft": "24px",
+        }
+      }
+    >
+      option 1
+      <span
+        className="ant-sub-menu-arrow"
+      >
+        ►
+      </span>
+    </div>
+  </div>
+  <div
+    className="ant-sub-menu test-2"
+  >
+    <div
+      className="ant-sub-menu-title"
+      onClick={[Function]}
+      style={
+        Object {
+          "paddingLeft": "24px",
+        }
+      }
+    >
+      option 2
+      <span
+        className="ant-sub-menu-arrow"
+      >
+        ►
+      </span>
+    </div>
+  </div>
+  <div
+    className="ant-menu-item test-3"
+    onClick={[Function]}
+    style={
+      Object {
+        "paddingLeft": "24px",
+      }
+    }
+  >
+    option 3
+  </div>
+</div>
+`;

@@ -5,6 +5,7 @@ import Menu from './components/menu/menu';
 import SubMenu from './components/menu/sub-menu';
 import MenuItem from './components/menu/menu-item';
 import menu from './components/menu/menu';
+import useSetState from './hooks/useSetState';
 
 const initialDataSource = [
   {
@@ -86,25 +87,32 @@ const menuList = [
 ];
 
 function App () {
-  const [selectedKey, setSelectedKey] = useState('');
-  const getMenus = (menus: any, level = 1) => {
+  const [menuKey, setMenuKey] = useSetState({
+    selectedKey: '',
+    openedKeys: [] as string[]
+  });
+  const getMenus = (menus: any) => {
     return menus.map((menu: any) => {
       if (menu.children) {
         return (
           <SubMenu key={menu.key} id={menu.key} title={menu.title}>
             {/* can recognize different content versus vue named slots ? */}
-            {getMenus(menu.children, level + 1)}
+            {getMenus(menu.children)}
           </SubMenu>
         );
       }
-      return <MenuItem key={menu.key} id={menu.key} level={level}>{menu.title}</MenuItem>;
+      return <MenuItem key={menu.key} id={menu.key}>{menu.title}</MenuItem>;
     });
   };
   return (
     <div className="App">
       {/*<AutoComplete dataSource={initialDataSource} />*/}
       {/*<Input allowClear/>*/}
-      <Menu selectedKey={selectedKey} onSelect={(key) => setSelectedKey(key)}>
+      <Menu
+        {...menuKey}
+        onSelect={(key) => setMenuKey({ selectedKey: key })}
+        onOpenChange={(keys) => setMenuKey({ openedKeys: keys })}
+      >
         {getMenus(menuList)}
       </Menu>
     </div>

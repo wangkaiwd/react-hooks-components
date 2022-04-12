@@ -10,12 +10,14 @@ interface MenuProps {
   selectedKey?: string;
   onSelect?: (key: string, item: object) => void;
   onOpenChange?: (keys: string[], item: object) => void;
+  inlineIndent?: number;
 }
 
-export const MenuContext = createContext<MenuProps>({});
+export const MenuContext = createContext<Partial<MenuProps>>({});
 
 const Menu: FC<MenuProps> = (props) => {
   const { className } = props;
+
   return (
     <MenuContext.Provider value={props}>
       <div className={cls(prefixCls, className)}>

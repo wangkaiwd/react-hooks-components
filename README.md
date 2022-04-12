@@ -2,7 +2,7 @@
 
 Write some components to study usage of react.
 
-Plan to implement following components:
+implement following components:
 
 * Input
 * AutoComplete
@@ -12,12 +12,16 @@ Plan to implement following components:
 * UpPullRefresh/DownPullMore
 * VirtualList
 
-And plan to implement following simple but useful custom hooks:
+And implement following simple but useful custom hooks:
 
 * useUpdate
 * useUpdateEffect
 * useGetSet
 * useGetSetState
+
+### build
+
+### document
 
 ### Experience
 

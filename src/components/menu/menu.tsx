@@ -1,8 +1,10 @@
-import React, { createContext, FC } from 'react';
-import cls from 'classnames';
-import './index.scss';
+import React, { createContext, FC } from "react";
+import cls from "classnames";
+import "./index.scss";
+import SubMenu from "./sub-menu";
+import MenuItem from "./menu-item";
 
-const prefixCls = 'ant-menu';
+const prefixCls = "ant-menu";
 
 interface MenuProps {
   className?: string;
@@ -14,7 +16,6 @@ interface MenuProps {
 }
 
 export const MenuContext = createContext<Partial<MenuProps>>({});
-
 const Menu: FC<MenuProps> = (props) => {
   const { className } = props;
 

@@ -21,6 +21,9 @@ And implement following simple but useful custom hooks:
 
 ### build
 
+* [peerDependencies](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependencies)
+* [duplicate react](https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react)
+
 ### document
 
 ### Experience

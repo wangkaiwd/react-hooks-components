@@ -22,7 +22,13 @@ And implement following simple but useful custom hooks:
 ### build
 
 * [peerDependencies](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependencies)
+
+#### problem
+
 * [duplicate react](https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react)
+  * npm link library (how to resolve ?)
+* if `tsx` file import `css`, it will import `css` inside of correspond `.d.ts` file
+  * rollup-plugin-dts can resolve this, but this is normally situation ?
 
 ### document
 

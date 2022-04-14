@@ -27,10 +27,11 @@ const config = [
       // https://github.com/rollup/rollup-plugin-commonjs/issues/407#issuecomment-527837831
       commonjs(),
       typescript({
+        useTsconfigDeclarationDir: true,
         tsconfigOverride: {
           compilerOptions: {
-            outDir: "build",
-            declaration: true
+            declaration: true,
+            declarationDir: "build/types"
           },
           exclude: [
             "src/**/__tests__/**",
@@ -43,7 +44,7 @@ const config = [
     ]
   },
   {
-    input: "build/main.d.ts",
+    input: "build/types/main.d.ts",
     output: [{ file: "build/antd.d.ts", format: "es" }],
     external: [/\.scss$/],
     plugins: [dts()]

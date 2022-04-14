@@ -4,12 +4,13 @@
   "main": "build/antd.cjs.js",
   "module": "build/antd.es.js",
   "types": "build/antd.d.ts",
+  "unpkg": "build/antd.global.js",
   "files": [
     "build"
   ],
   "scripts": {
     "start": "craco start",
-    "build": "rm -rf build && rollup -c rollup.config.js",
+    "build": "rm -rf build && rollup -c rollup.config.js && rm -rf build/types",
     "test": "craco test"
   },
   "browserslist": {

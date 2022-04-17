@@ -7,10 +7,10 @@ implement following components:
 * Input
 * AutoComplete
 * Menu
+* VirtualList
 * Form
 * Tree
 * UpPullRefresh/DownPullMore
-* VirtualList
 
 And implement following simple but useful custom hooks:
 

@@ -24,7 +24,7 @@ const AutoComplete: FC<Props> = (props) => {
     }
     return <li>no content!</li>;
   };
-  // trigger two frequently
+  // trigger too frequently
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     rest.onChange(value);

@@ -1,5 +1,6 @@
-## React practice
-
+---
+sidemenu: false
+---
 ### Usage
 
 Install
@@ -10,7 +11,7 @@ npm install @sppk/antd
 
 Use in your code:
 
-```tsx
+```tsx | pure
 import { Input } from '@sppk/antd'
 
 const YourComponent = () => {

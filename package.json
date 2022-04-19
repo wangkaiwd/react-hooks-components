@@ -11,7 +11,9 @@
   "scripts": {
     "start": "craco start",
     "build": "rm -rf build && rollup -c rollup.config.js && rm -rf build/types",
-    "test": "craco test"
+    "test": "craco test",
+    "docs": "cross-env APP_ROOT=dumi dumi dev",
+    "docs:build": "cross-env APP_ROOT=dumi dumi build"
   },
   "browserslist": {
     "production": [
@@ -37,8 +39,6 @@
     "react-dom": "17.x"
   },
   "devDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "@craco/craco": "^7.0.0-alpha.3",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -49,6 +49,10 @@
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "@types/react-test-renderer": "^17.0.1",
+    "cross-env": "^7.0.3",
+    "dumi": "^1.1.40",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
     "react-test-renderer": "^17.0.0",
     "rollup": "^2.70.1",

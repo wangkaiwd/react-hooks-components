@@ -27,6 +27,28 @@ Build Library:
 * create-react-app: run project in local
 * rollup: generate bundle for production environment
 
+### Usage
+
+Install
+
+```shell
+npm install @sppk/antd
+```
+
+Use in your code:
+
+```tsx
+import { Input } from '@sppk/antd'
+
+const YourComponent = () => {
+  const [value, setValue] = useState('')
+  const onInputChange = (e) => {
+    setValue(e.target.value)
+  }
+  return <Input value={value} placeholder={'Please input something..'} />
+}
+```
+
 ### Disclaimer
 
 This project only for study purpose, don't use it in production environment!

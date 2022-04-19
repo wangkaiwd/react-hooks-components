@@ -2,15 +2,12 @@
 
 Write some components to study usage of react.
 
-implement following components:
+Implement following components:
 
 * Input
 * AutoComplete
 * Menu
 * VirtualList
-* Form
-* Tree
-* UpPullRefresh/DownPullMore
 
 And implement following simple but useful custom hooks:
 
@@ -19,24 +16,29 @@ And implement following simple but useful custom hooks:
 * useGetSet
 * useGetSetState
 
-### build
+Test Library:
 
-* [peerDependencies](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependencies)
+* jest
+* @testing-library/react
+* @testing-library/react-hooks
 
-#### problem
+Build Library:
 
-* [duplicate react](https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react)
-  * npm link library (how to resolve ?)
-* if `tsx` file import `css`, it will import `css` inside of correspond `.d.ts` file
-  * rollup-plugin-dts can resolve this, but this is normally situation ?
+* create-react-app: run project in local
+* rollup: generate bundle for production environment
 
-### document
+### Disclaimer
 
-### Experience
+This project only for study purpose, don't use it in production environment!
 
-* useEffect always trigger after component first render, event pass dependencies array to it
-
-### Reference resource
+All of my code learn from following projects source code and make some simplify:
 
 * [react-use](https://github.com/streamich/react-use)
 * [ant-design](https://github.com/ant-design/ant-design)
+
+I learn a lot of `React` ecosystem knowledge from this project and record my experiences in here.
+
+If you are also studying `React`, hope this can help you ❤️.
+
+
+

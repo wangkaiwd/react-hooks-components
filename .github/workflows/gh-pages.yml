@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master # default branch
-    paths:
-      - /dumi/**/*
+#    paths:
+#      - /dumi/**/*
 
 jobs:
   deploy:

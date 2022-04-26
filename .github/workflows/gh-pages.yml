@@ -5,7 +5,7 @@ on:
     branches:
       - master # default branch
     paths:
-      - 'dumi/**'
+      - dumi/**
 
 jobs:
   deploy:

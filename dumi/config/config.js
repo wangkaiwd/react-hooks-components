@@ -1,6 +1,6 @@
 const config = {
-  base: "/react-storybook",
-  publicPath: "/react-storybook/",
+  base: "/wangkaiwd/react-storybook",
+  publicPath: "/wangkaiwd/react-storybook/",
   exportStatic: {}, // Export all routes as HTML directory structure to avoid 404 when refreshing the page
   chainWebpack (memo) {
     memo.plugins.delete("copy");

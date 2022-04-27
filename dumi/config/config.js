@@ -13,6 +13,10 @@ const config = {
       {
         title: "Home",
         path: "/index"
+      },
+      {
+        title: "Record",
+        path: "/record"
       }
     ]
   }

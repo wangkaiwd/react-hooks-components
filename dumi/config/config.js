@@ -1,3 +1,4 @@
+const logo = "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg";
 const config = {
   base: "/react-storybook",
   publicPath: "/react-storybook/",
@@ -7,8 +8,8 @@ const config = {
   },
   mode: "site",
   title: "React Practice",
-  favicon: "https://www.vectorlogo.zone/logos/reactjs/reactjs-ar21.svg",
-  logo: "https://www.vectorlogo.zone/logos/reactjs/reactjs-ar21.svg",
+  favicon: logo,
+  logo,
   menus: {
     "/": [
       {

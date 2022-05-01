@@ -1,4 +1,4 @@
-import React, { CSSProperties, HTMLAttributes, UIEvent, useState } from "react";
+import React, { cloneElement, CSSProperties, HTMLAttributes, UIEvent, useState } from "react";
 import cls from "classnames";
 import "./index.scss";
 
@@ -6,7 +6,8 @@ interface VirtualListProps extends HTMLAttributes<HTMLDivElement> {
   height: number,
   itemHeight: number,
   data: any[],
-  itemKey?: string | number
+  itemKey?: string | number,
+  children: (item: any, i: number) => JSX.Element
 }
 
 // Render additional one item for motion usage
@@ -27,14 +28,20 @@ const VirtualList = (props: VirtualListProps) => {
   const scrollHandler = (e: UIEvent<HTMLDivElement>) => {
     const { scrollTop: newScrollTop } = e.currentTarget;
     const maxTop = containerHeight - height;
-    // 1. scroll event not trigger when content scroll per one pixel
-    // 2. below code will make scroll to bottom not precise
-    // 3. newScrollTop update interval depend on speed of mouse wheel scroll speed
-    // if(newScrollTop <= maxTop) {
-    //    setScrollTop(maxTop)
-    // }
     // todo: can optimize this by add event trigger interval
     setScrollTop(newScrollTop > maxTop ? maxTop : newScrollTop);
+  };
+  const getKey = (i: number) => {
+    if (!itemKey) {
+      return i;
+    }
+    return data[i][itemKey];
+  };
+  const getChildList = () => {
+    return data.slice(start, end).map((item, i) => {
+      const eleIndex = start + i;
+      return (cloneElement(props.children(item, eleIndex), { key: getKey(eleIndex) }));
+    });
   };
   return (
     <div
@@ -51,8 +58,7 @@ const VirtualList = (props: VirtualListProps) => {
           className={cls(`${prefixCls}-wrapper`)}
           style={{ transform: `translateY(${scrollTop}px)` }}
         >
-          {data.slice(start, end).map((item, i) => (
-            <div key={item[itemKey as any] ?? i} style={itemStyles}>{item.id}</div>))}
+          {getChildList()}
         </div>
       </div>
     </div>

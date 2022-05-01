@@ -13,6 +13,17 @@ Combine with custom list
 
 * type of `event.target` and `event.currentTarget`
   * https://github.com/DefinitelyTyped/DefinitelyTyped/issues/11508
+* cloneElement:
+
+```jsx
+const newProps = { a: 1 }
+const element = <div>1</div>
+<element.type {...element.props} {...newProps}></element.type>
+```
+
+* children:
+  * can pass by `props` (`<Component children={['1']}>children</Component>`), it will override `children` which
+    inside `component`
 
 ### Todo
 

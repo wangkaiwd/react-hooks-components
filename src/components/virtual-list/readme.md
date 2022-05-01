@@ -33,6 +33,21 @@ Combine with custom list
 ### Scroll DOM Manipulate
 
 * scroll event trigger has interval which depend on your mouse wheel scroll speed
+
+```tsx
+const scrollHandler = (e: UIEvent<HTMLDivElement>) => {
+  const { scrollTop: newScrollTop } = e.currentTarget;
+  const maxTop = containerHeight - height;
+  // 1. scroll event not trigger when content scroll per one pixel
+  // 2. below code will make scroll to bottom not precise
+  // 3. newScrollTop update interval depend on speed of mouse wheel scroll speed
+  if (newScrollTop <= maxTop) { // incorrect
+    setScrollTop(maxTop)
+  }
+  // setScrollTop(newScrollTop > maxTop ? maxTop : newScrollTop);
+};
+```
+
 * keep visible element always in user's visual
   * `position: absolute; top: xxx;`
   * `transform: translateY(xxx);`

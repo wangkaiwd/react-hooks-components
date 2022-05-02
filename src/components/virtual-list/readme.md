@@ -24,16 +24,19 @@ const element = <div>1</div>
 * children:
   * can pass by `props` (`<Component children={['1']}>children</Component>`), it will override `children` which
     inside `component`
+* [Use multiple refs for an array of elements with hooks ?](https://stackoverflow.com/a/56063129/12819402)
 
 ### Todo
 
-[] Optimization test with chrome
+[ ] Optimization test with chrome
+[ ] scroll distance little then one item height not update transform
 
 ### Problems
 
 1. Display how many length items in DOM at once ?
 2. How to calculate container height when list item has margin ?
 3. How to update start and end when scroll ?
+4. Why need pass minimum height of item ?
 
 ### Resource
 
@@ -62,3 +65,12 @@ const scrollHandler = (e: UIEvent<HTMLDivElement>) => {
 * keep visible element always in user's visual
   * `position: absolute; top: xxx;`
   * `transform: translateY(xxx);`
+
+### Steps
+
+Dynamic item height:
+
+* calculate start
+* calculate offset
+
+look scrollbar carefully

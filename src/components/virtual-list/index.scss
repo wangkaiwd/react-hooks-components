@@ -1,3 +1,7 @@
 .ant-virtual-list {
   overflow-y: auto;
+  &-inner {
+  }
+  &-wrapper {
+  }
 }

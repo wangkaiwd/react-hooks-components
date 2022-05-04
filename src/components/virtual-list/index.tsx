@@ -3,7 +3,6 @@ import React, {
   CSSProperties,
   HTMLAttributes,
   UIEvent,
-  useEffect,
   useMemo,
   useRef,
   useState
@@ -29,10 +28,12 @@ const VirtualList = (props: VirtualListProps) => {
     height: `${height}px`
   };
   const [scrollTop, setScrollTop] = useState(0);
+  // todo: handle dom node and react node(fragment) ?
   const itemsRef = useRef(new Map<VirtualListProps["itemKey"], number>());
   const getKey = (item: any) => {
     return item[itemKey];
   };
+  // todo: try understand below code
   const { start, end, offset, scrollHeight } = useMemo(() => {
     const dataLen = data.length;
     const heights = itemsRef.current;
@@ -101,7 +102,6 @@ const VirtualList = (props: VirtualListProps) => {
       const eleIndex = start + i;
       return cloneElement(props.children(item, eleIndex), {
         key: getKey(item),
-        // todo: Children may be custom component (ReactDOM.findDOMNode ?)
         ref: (el: HTMLElement) => setItemsRef(el, item)
       });
     });

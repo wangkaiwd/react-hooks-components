@@ -11,6 +11,8 @@ Combine with custom list
 
 ### Knowledge
 
+* [simple demo](https://jsfiddle.net/97evysno/)
+* [forward refs](https://reactjs.org/docs/forwarding-refs.html)
 * type of `event.target` and `event.currentTarget`
   * https://github.com/DefinitelyTyped/DefinitelyTyped/issues/11508
 * cloneElement:
@@ -22,27 +24,23 @@ const element = <div>1</div>
 ```
 
 * children:
-  * can pass by `props` (`<Component children={['1']}>children</Component>`), it will override `children` which
+  * can pass by `props` (`<Component children={['1']}>children</Component>`), `children` props will override `children`
+    which
     inside `component`
 * [Use multiple refs for an array of elements with hooks ?](https://stackoverflow.com/a/56063129/12819402)
-
-### Todo
-
-[ ] Optimization test with chrome
-[ ] scroll distance little then one item height not update transform
+  * use map or object `{k:el1,k2:el2}` store refs(in there is `id`)
+* [Warning about deprecated findDOMNode usage](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
+  * [exposing-dom-refs-to-parent-components](https://reactjs.org/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components)
+  * [findDOMNode](https://reactjs.org/docs/react-dom.html#finddomnode)
 
 ### Problems
 
 1. Display how many length items in DOM at once ?
+   * addition render one item for motion usage
 2. How to calculate container height when list item has margin ?
 3. How to update start and end when scroll ?
 4. Why need pass minimum height of item ?
-
-### Resource
-
-* [simple demo](https://jsfiddle.net/97evysno/)
-* [forward refs](https://reactjs.org/docs/forwarding-refs.html)
-* [refs and the DOM](https://reactjs.org/docs/refs-and-the-dom.html)
+5. If items has some image which width and height auto, such as waterfall layout (give it minimum item height ?)
 
 ### Scroll DOM Manipulate
 

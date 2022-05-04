@@ -33,7 +33,10 @@ const VirtualList = (props: VirtualListProps) => {
   const getKey = (item: any) => {
     return item[itemKey];
   };
-  // todo: try understand below code
+  // 1. cache render height, first render will use itemHeight
+  // 2. start: first item index : scrollTop > item bottom
+  // 3. total height: for loop all items and get sum of each item(bottom)
+  // 4. offset: start index top and change over start index
   const { start, end, offset, scrollHeight } = useMemo(() => {
     const dataLen = data.length;
     const heights = itemsRef.current;
@@ -46,8 +49,10 @@ const VirtualList = (props: VirtualListProps) => {
     for (let i = 0; i < dataLen; i += 1) {
       const item = data[i];
       const key = getKey(item);
-
+      // cache items height once item rendered
+      // mouse scroll must trigger scroll event multiple times (theoretically speaking will calculate mislead when fist render new item, but this can't appear in real life)
       const cacheHeight = heights.get(key);
+
       const currentItemBottom = itemTop + (cacheHeight === undefined ? itemHeight : cacheHeight);
       // Check item top in the range
       if (currentItemBottom >= scrollTop && startIndex === undefined) {
@@ -59,7 +64,6 @@ const VirtualList = (props: VirtualListProps) => {
       if (currentItemBottom > scrollTop + height && endIndex === undefined) {
         endIndex = i;
       }
-
       itemTop = currentItemBottom;
     }
 
@@ -72,7 +76,7 @@ const VirtualList = (props: VirtualListProps) => {
     if (endIndex === undefined) {
       endIndex = dataLen - 1;
     }
-    console.log("itemTop, startIndex, endIndex, startOffset", itemTop, startIndex, endIndex, startOffset);
+    console.log("itemTop, startIndex, endIndex, startOffset, heights", itemTop, startIndex, endIndex, startOffset, JSON.stringify(Array.from(heights)));
     // Give cache to improve scroll experience
     endIndex = Math.min(endIndex + 1, dataLen);
     return {
@@ -106,6 +110,7 @@ const VirtualList = (props: VirtualListProps) => {
       });
     });
   };
+  console.log("render");
   return (
     <div
       className={classes}

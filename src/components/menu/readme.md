@@ -6,4 +6,4 @@
 
 ### Todos
 
-[] get key from props and regard it as unique id
+- [] get key from props and regard it as unique id

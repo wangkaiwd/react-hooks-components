@@ -76,7 +76,7 @@ const VirtualList = (props: VirtualListProps) => {
     if (endIndex === undefined) {
       endIndex = dataLen - 1;
     }
-    console.log("itemTop, startIndex, endIndex, startOffset, heights", itemTop, startIndex, endIndex, startOffset, JSON.stringify(Array.from(heights)));
+    // console.log("itemTop, startIndex, endIndex, startOffset, heights", itemTop, startIndex, endIndex, startOffset, JSON.stringify(Array.from(heights)));
     // Give cache to improve scroll experience
     endIndex = Math.min(endIndex + 1, dataLen);
     return {
@@ -89,7 +89,8 @@ const VirtualList = (props: VirtualListProps) => {
   // itemsHeight: {k1:number,k2:number}
   const setItemsRef = (el: HTMLElement, item: any) => {
     const key = getKey(item);
-    if (!itemsRef.current.has(key)) {
+    // https://reactjs.org/docs/refs-and-the-dom.html#caveats-with-callback-refs
+    if (!itemsRef.current.has(key) && el) {
       itemsRef.current.set(key, el.offsetHeight);
     }
   };
@@ -106,11 +107,12 @@ const VirtualList = (props: VirtualListProps) => {
       const eleIndex = start + i;
       return cloneElement(props.children(item, eleIndex), {
         key: getKey(item),
-        ref: (el: HTMLElement) => setItemsRef(el, item)
+        ref: (el: HTMLElement) => {
+          setItemsRef(el, item);
+        }
       });
     });
   };
-  console.log("render");
   return (
     <div
       className={classes}

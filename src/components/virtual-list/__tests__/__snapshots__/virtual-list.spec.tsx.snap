@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VirtualList: should render successfully 1`] = `
+<div
+  className="ant-virtual-list"
+  onScroll={[Function]}
+  style={
+    Object {
+      "height": "300px",
+    }
+  }
+>
+  <div
+    className="ant-virtual-list-inner"
+    style={
+      Object {
+        "height": "3000px",
+      }
+    }
+  >
+    <div
+      className="ant-virtual-list-wrapper"
+      style={
+        Object {
+          "transform": "translateY(0px)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        0
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        1
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        2
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        3
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        4
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        5
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        6
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        7
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        8
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        9
+      </div>
+      <div
+        style={
+          Object {
+            "height": "30px",
+          }
+        }
+      >
+        10
+      </div>
+    </div>
+  </div>
+</div>
+`;

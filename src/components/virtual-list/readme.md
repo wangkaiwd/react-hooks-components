@@ -2,12 +2,7 @@
 
 ### API
 
-height must fix ?
-
-* dataSource
-* containerHeight
-
-Combine with custom list
+Dynamic height of items
 
 ### Knowledge
 
@@ -50,7 +45,7 @@ const element = <div>1</div>
 const scrollHandler = (e: UIEvent<HTMLDivElement>) => {
   const { scrollTop: newScrollTop } = e.currentTarget;
   const maxTop = containerHeight - height;
-  // 1. scroll event not trigger when content scroll per one pixel
+  // 1. scroll event not must fire when content scroll per one pixel
   // 2. below code will make scroll to bottom not precise
   // 3. newScrollTop update interval depend on speed of mouse wheel scroll speed
   if (newScrollTop <= maxTop) { // incorrect
@@ -64,11 +59,6 @@ const scrollHandler = (e: UIEvent<HTMLDivElement>) => {
   * `position: absolute; top: xxx;`
   * `transform: translateY(xxx);`
 
-### Steps
-
-Dynamic item height:
-
-* calculate start
-* calculate offset
-
-look scrollbar carefully
+### Resource
+* [virtual-list](https://github.com/react-component/virtual-list)
+* [react-window](https://github.com/bvaughn/react-window)

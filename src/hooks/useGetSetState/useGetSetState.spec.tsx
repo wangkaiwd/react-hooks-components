@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import useGetSetState from "../useGetSetState";
+import useGetSetState from "./useGetSetState";
 
 describe("useSetState", () => {
   it("should merge get state immediately after set state", () => {

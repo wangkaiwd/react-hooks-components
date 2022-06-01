@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import useUpdateEffect from '../useUpdateEffect';
+import useUpdateEffect from './useUpdateEffect';
 import { useState } from 'react';
 
 describe('useUpdateEffect', () => {

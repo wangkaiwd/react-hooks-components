@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import useSetState from "../useSetState";
+import useSetState from "./useSetState";
 
 describe("useSetState", () => {
   it("should merge old state then update state", () => {

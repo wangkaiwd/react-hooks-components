@@ -1,7 +1,7 @@
 import React, { ChangeEvent, MouseEvent, InputHTMLAttributes, useRef, useState, useEffect } from 'react';
 import cls from 'classnames';
 import './input.scss';
-import useUpdateEffect from '../../hooks/useUpdateEffect';
+import useUpdateEffect from '../../hooks/useUpdateEffect/useUpdateEffect';
 
 const prefixCls = 'ant-input';
 

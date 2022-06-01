@@ -1,7 +1,7 @@
-import useSetState from "./useSetState";
+import useSetState from "../useSetState/useSetState";
 import { useRef } from "react";
-import { Patch } from "./types";
-import { isFun } from "../utils/data-types";
+import { Patch } from "../types";
+import { isFun } from "../../utils/data-types";
 
 const useGetSetState = <S extends object> (initialState: S): [() => S, (path: Patch<S>) => void] => {
   const [state, setState] = useSetState(initialState);

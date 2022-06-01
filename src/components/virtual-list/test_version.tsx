@@ -1,7 +1,7 @@
 import React, { CSSProperties, UIEvent } from "react";
 import "./index.scss";
 import cls from "classnames";
-import useSetState from "../../hooks/useSetState";
+import useSetState from "../../hooks/useSetState/useSetState";
 
 const prefixCls = "ant-virtual-list";
 

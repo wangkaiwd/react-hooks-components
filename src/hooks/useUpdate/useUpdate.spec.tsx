@@ -1,4 +1,4 @@
-import useUpdate from "../useUpdate";
+import useUpdate from "./useUpdate";
 import { act, renderHook } from "@testing-library/react-hooks";
 
 describe("useUpdate", () => {

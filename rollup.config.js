@@ -32,12 +32,7 @@ const config = [
           compilerOptions: {
             declaration: true,
             declarationDir: "build/types"
-          },
-          exclude: [
-            "src/**/__tests__/**",
-            "src/**/*.spec.{ts,tsx}",
-            "src/**/*.test.{ts,tsx}"
-          ]
+          }
         }
       }),
       postcss()

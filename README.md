@@ -58,6 +58,7 @@ This project only for study purpose, don't use it in production environment!
 All of my code learn from following projects source code and make some simplify:
 
 * [react-use](https://github.com/streamich/react-use)
+* [ahooks](https://github.com/alibaba/hooks)
 * [ant-design](https://github.com/ant-design/ant-design)
 
 I learn a lot of `React` ecosystem knowledge from this project and record my experiences in here.

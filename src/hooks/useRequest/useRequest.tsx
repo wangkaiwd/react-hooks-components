@@ -1,17 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-interface IOptions {
+interface Options {
   manual?: boolean;
   defaultParams?: any;
+  pollingInterval?: number;
+  cancel?: () => void;
 }
 
 type RequestError = undefined | Error
 type Service = (...args: any[]) => Promise<any>
-const useRequest = (service: Service, options?: IOptions) => {
-  const { manual = false, defaultParams } = options || {};
+const useRequest = (service: Service, options?: Options) => {
+  const { manual = false, defaultParams, pollingInterval } = options || {};
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<RequestError>(undefined);
   const [params, setParams] = useState<any[]>([]);
+  const timerId = useRef<null | number>(null);
+  const paramsRef = useRef(params);
+  paramsRef.current = params;
+  const cancel = () => {
+    if (timerId.current) {
+      clearTimeout(timerId.current);
+      timerId.current = null;
+    }
+  };
+  const enablePolling = () => {
+    timerId.current = window.setTimeout(() => {
+      wrapperService(...paramsRef.current);
+    }, pollingInterval);
+  };
   const wrapperService: Service = (...args) => {
     setLoading(true);
     setParams(args);
@@ -20,7 +36,12 @@ const useRequest = (service: Service, options?: IOptions) => {
         setError(new Error(reason));
         return Promise.reject(reason);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        if (pollingInterval) {
+          enablePolling();
+        }
+      });
   };
   const refresh = () => {
     return wrapperService(...params);
@@ -31,7 +52,7 @@ const useRequest = (service: Service, options?: IOptions) => {
     }
     // how cancel subscribe in here ?
   }, []);
-  return { run: wrapperService, params, refresh, loading, error };
+  return { runAsync: wrapperService, params, refresh, loading, error, cancel };
 };
 
 export default useRequest;

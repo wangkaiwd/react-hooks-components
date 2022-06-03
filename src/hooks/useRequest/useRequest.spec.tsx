@@ -41,7 +41,7 @@ describe("useRequest:", () => {
     });
     expect(fetchDemo).toBeCalledTimes(0);
     act(() => {
-      result.current.run();
+      result.current.runAsync();
       expect(fetchDemo).toBeCalledTimes(1);
     });
   });
@@ -53,8 +53,41 @@ describe("useRequest:", () => {
       return useRequest(fetchDemo, { manual: true });
     });
     await act(async () => {
-      await result.current.run("cat");
+      await result.current.runAsync("cat");
       expect(result.current.params).toEqual(["cat"]);
+    });
+  });
+  it("should polling service with pollingInterval", async () => {
+    jest.useFakeTimers();
+    // creates a mock function similar to jest.fn but also tracks calls to object[methodName]. Returns a Jest mock function
+    // jest.spyOn(global, "setTimeout");
+    const fetchDemo = jest.fn((value) => {
+      return createPromise(value, undefined, 1000);
+    });
+    const { result, waitForNextUpdate } = renderHook(() => {
+      return useRequest(fetchDemo, { pollingInterval: 100, manual: true });
+    });
+    // fixme: is this correctly ?
+    await act(async () => {
+      result.current.runAsync("cat");
+      jest.advanceTimersByTime(1000);
+      // why need wait for next update
+      await waitForNextUpdate();
+      expect(fetchDemo).toBeCalledTimes(1);
+      jest.advanceTimersByTime(100);
+      expect(fetchDemo).toBeCalledTimes(2);
+      jest.advanceTimersByTime(1000);
+      await waitForNextUpdate();
+      jest.advanceTimersByTime(100);
+      expect(fetchDemo).toBeCalledTimes(3);
+      jest.advanceTimersByTime(1000);
+      await waitForNextUpdate();
+      jest.advanceTimersByTime(80);
+      // cancel polling
+      result.current.cancel();
+      jest.advanceTimersByTime(20);
+      expect(fetchDemo).toBeCalledTimes(3);
+      jest.useRealTimers();
     });
   });
 });

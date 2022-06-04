@@ -8,15 +8,16 @@ interface CacheItem {
 
 const cache = new Map<string, CacheItem>();
 export const getCache = (key: string) => {
-  return cache.get(key)?.data;
+  return cache.get(key);
 };
 
-export const setCache = (key: string, data: any) => {
+export const setCache = (key: string, cacheItem: { data: any, params: any }) => {
   const item = cache.get(key);
   if (!item) {
-    cache.set(key, { data, listeners: [] });
+    cache.set(key, { ...cacheItem, listeners: [] });
   } else {
-    item.data = data;
+    item.data = cacheItem.data;
+    item.params = cacheItem.params;
   }
 };
 

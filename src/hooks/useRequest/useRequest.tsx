@@ -13,8 +13,6 @@ interface Options {
 
 type RequestError = undefined | Error
 type Service = (...args: any[]) => Promise<any>
-// setCache
-// getCache
 const useRequest = (service: Service, options: Options = {}) => {
   const {
     manual = false,
@@ -97,10 +95,11 @@ const useRequest = (service: Service, options: Options = {}) => {
   useEffect(() => {
     if (cacheKey) {
       // update all cacheKey(share data)
+      const cacheData = getCache(cacheKey);
+      setData(cacheData?.data);
       trackCache(cacheKey, (data) => {
         setData(data);
       });
-      triggerCache(cacheKey);
     }
     if (!manual) {
       wrapperService(defaultParams).catch((error) => {

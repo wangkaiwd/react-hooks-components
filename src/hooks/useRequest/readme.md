@@ -8,16 +8,6 @@
 * error
 * polling
 * error retry
+* swr
 * throttle
 * debounce
-* swr
-
-### Goal
-
-**Create an open source request hooks**
-
-So we must complete following task:
-* test
-* build
-* doc
-* changelog

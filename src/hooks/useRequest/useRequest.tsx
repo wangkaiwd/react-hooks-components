@@ -1,4 +1,5 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { getCache, setCache, trackCache, triggerCache } from "../../utils/cache";
 
 interface Options {
   manual?: boolean;
@@ -7,24 +8,26 @@ interface Options {
   cancel?: () => void;
   retryCount?: number;
   retryInterval?: number;
+  cacheKey?: string;
 }
 
 type RequestError = undefined | Error
 type Service = (...args: any[]) => Promise<any>
-
-// new Fetch
-// registry plugin
+// setCache
+// getCache
 const useRequest = (service: Service, options: Options = {}) => {
   const {
     manual = false,
     defaultParams,
     pollingInterval,
     retryCount,
-    retryInterval
+    retryInterval,
+    cacheKey
   } = options;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<RequestError>(undefined);
   const [params, setParams] = useState<any[]>([]);
+  const [data, setData] = useState(null);
   const countRef = useRef(1);
   const pollingTimerIdRef = useRef<null | number>(null);
   const retryTimerIdRef = useRef<null | number>(null);
@@ -66,6 +69,14 @@ const useRequest = (service: Service, options: Options = {}) => {
     setLoading(true);
     setParams(args);
     return service(...args)
+      .then((res) => {
+        setData(res);
+        if (cacheKey) {
+          setCache(cacheKey, res);
+          triggerCache(cacheKey);
+        }
+        return res;
+      })
       .catch((reason) => {
         setError(new Error(reason));
         onRetry();
@@ -84,13 +95,22 @@ const useRequest = (service: Service, options: Options = {}) => {
     });
   };
   useEffect(() => {
+    if (cacheKey) {
+      // update all cacheKey(share data)
+      trackCache(cacheKey, (data) => {
+        setData(data);
+      });
+      triggerCache(cacheKey);
+    }
     if (!manual) {
-      refresh();
+      wrapperService(defaultParams).catch((error) => {
+        // console.log("error", error);
+      });
     }
     return cancel;
     // how cancel subscribe in here ?
   }, []);
-  return { runAsync: wrapperService, params, refresh, loading, error, cancel };
+  return { runAsync: wrapperService, params: paramsRef.current, refresh, loading, error, cancel, data };
 };
 
 export default useRequest;

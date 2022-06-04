@@ -98,7 +98,7 @@ describe("useRequest:", () => {
     const { waitForNextUpdate } = renderHook(() => {
       return useRequest(fetchDemo, { retryCount: 2 });
     });
-    act(() => {
+    act(() => { // ensure state update after service in act
       jest.advanceTimersByTime(1000);
     });
     await waitForNextUpdate();
@@ -119,6 +119,7 @@ describe("useRequest:", () => {
       jest.runAllTimers();
     });
     // no update, so this line cause timeout ?
+    // https://github.com/testing-library/react-hooks-testing-library/issues/346#issuecomment-617552215
     // await waitForNextUpdate();
     expect(fetchDemo).toBeCalledTimes(3);
   });

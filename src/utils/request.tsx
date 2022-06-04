@@ -1,4 +1,4 @@
-export const requestCreator = (value: any, reason: any, delay: number) => {
+export const requestCreator = (value: any, reason: any, delay: number = 1000) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (value) {

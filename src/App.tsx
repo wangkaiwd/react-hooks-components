@@ -1,11 +1,12 @@
 import React from "react";
 import "./styles/index.scss";
-import UseRequestBasic from "./hooks/useRequest/demo/basic";
+import ErrorRetry from "./hooks/useRequest/demo/errorRetry";
 
 function App () {
   return (
     <div className="App" style={{ padding: "20px" }}>
-      <UseRequestBasic />
+      {/*<UseRequestBasic />*/}
+      <ErrorRetry />
     </div>
   );
 }

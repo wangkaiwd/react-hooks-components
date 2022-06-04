@@ -2,12 +2,12 @@ import useRequest from "../useRequest";
 import { useState } from "react";
 import { requestCreator } from "../../../utils/request";
 
-const UseRequestBasic = () => {
+const ErrorRetry = () => {
   const [name, setName] = useState("cat");
   const fetchDemo = (name: string) => {
-    return requestCreator(name, undefined, 1000);
+    return requestCreator(undefined, "error", 1000);
   };
-  const { loading, cancel, runAsync } = useRequest(fetchDemo, { manual: true, pollingInterval: 3000 });
+  const { loading, cancel, runAsync } = useRequest(fetchDemo, { manual: true, retryCount: 2 });
   return (
     <div>
       <input value={name} type="text" onChange={(e) => setName(e.target.value)} />
@@ -17,4 +17,4 @@ const UseRequestBasic = () => {
   );
 };
 
-export default UseRequestBasic;
+export default ErrorRetry;

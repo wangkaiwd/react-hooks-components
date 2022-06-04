@@ -57,6 +57,7 @@ describe("useRequest:", () => {
       expect(result.current.params).toEqual(["cat"]);
     });
   });
+  // todo: known about how to test polling service correctly
   it("should polling service with pollingInterval", async () => {
     jest.useFakeTimers();
     // creates a mock function similar to jest.fn but also tracks calls to object[methodName]. Returns a Jest mock function
@@ -67,7 +68,6 @@ describe("useRequest:", () => {
     const { result, waitForNextUpdate } = renderHook(() => {
       return useRequest(fetchDemo, { pollingInterval: 100, manual: true });
     });
-    // fixme: is this correctly ?
     await act(async () => {
       result.current.runAsync("cat");
       jest.advanceTimersByTime(1000);
@@ -89,5 +89,37 @@ describe("useRequest:", () => {
       expect(fetchDemo).toBeCalledTimes(3);
       jest.useRealTimers();
     });
+  });
+  it("should retry service when request error", async () => {
+    jest.useFakeTimers();
+    const fetchDemo = jest.fn(() => {
+      return createPromise(undefined, "error", 1000);
+    });
+    const { waitForNextUpdate } = renderHook(() => {
+      return useRequest(fetchDemo, { retryCount: 2 });
+    });
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+    await waitForNextUpdate();
+    act(() => {
+      jest.runAllTimers();
+    });
+    await waitForNextUpdate();
+    expect(fetchDemo).toBeCalledTimes(2);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+    await waitForNextUpdate();
+    expect(fetchDemo).toBeCalledTimes(3);
+
+    // stop retry
+    act(() => {
+      jest.runAllTimers();
+    });
+    // no update, so this line cause timeout ?
+    // await waitForNextUpdate();
+    expect(fetchDemo).toBeCalledTimes(3);
   });
 });

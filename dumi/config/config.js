@@ -1,5 +1,6 @@
 const path = require("path");
 const logo = "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg";
+const projectRoot = path.resolve(__dirname, "../../");
 const config = {
   base: "/react-storybook",
   publicPath: "/react-storybook/",
@@ -9,7 +10,7 @@ const config = {
   },
   mode: "site",
   resolve: {
-    includes: [path.resolve(__dirname, "../docs"), path.resolve(__dirname, "../../src")],
+    includes: [path.resolve(__dirname, "../docs"), path.resolve(projectRoot, "src")],
     previewLangs: []
   },
   title: "React Practice",

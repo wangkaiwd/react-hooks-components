@@ -1,5 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import useRequest from "./useRequest";
+import { requestCreator } from "../../utils/request";
 
 const createPromise = (value: any, reason: any, delay: number) => {
   return new Promise((resolve, reject) => {
@@ -13,6 +14,13 @@ const createPromise = (value: any, reason: any, delay: number) => {
   });
 };
 describe("useRequest:", () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+  afterEach(() => {
+    jest.useRealTimers();
+    jest.clearAllMocks();
+  });
   it("should auto run service", async () => {
     const fetchDemo = jest.fn(() => {
       return createPromise("cat", undefined, 1000);
@@ -59,7 +67,7 @@ describe("useRequest:", () => {
   });
   // todo: known about how to test polling service correctly
   it("should polling service with pollingInterval", async () => {
-    jest.useFakeTimers();
+
     // creates a mock function similar to jest.fn but also tracks calls to object[methodName]. Returns a Jest mock function
     // jest.spyOn(global, "setTimeout");
     const fetchDemo = jest.fn((value) => {
@@ -87,11 +95,9 @@ describe("useRequest:", () => {
       result.current.cancel();
       jest.advanceTimersByTime(20);
       expect(fetchDemo).toBeCalledTimes(3);
-      jest.useRealTimers();
     });
   });
   it("should retry service when request error", async () => {
-    jest.useFakeTimers();
     const fetchDemo = jest.fn(() => {
       return createPromise(undefined, "error", 1000);
     });
@@ -122,5 +128,34 @@ describe("useRequest:", () => {
     // https://github.com/testing-library/react-hooks-testing-library/issues/346#issuecomment-617552215
     // await waitForNextUpdate();
     expect(fetchDemo).toBeCalledTimes(3);
+  });
+  it("should cache data when init again", async () => {
+    const fetchDemo = jest.fn((value) => {
+      return requestCreator(value, undefined);
+    });
+    const hook1 = renderHook(() => {
+      return useRequest(fetchDemo, { cacheKey: "test", defaultParams: "cat" });
+    });
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+    expect(hook1.result.current.data).toBeFalsy();
+    await hook1.waitForNextUpdate();
+    expect(hook1.result.current.data).toBe("cat");
+
+    const hook2 = renderHook(() => {
+      return useRequest(fetchDemo, { cacheKey: "test", defaultParams: "dog" });
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+    // use cache data which has the same cacheKey
+    expect(hook2.result.current.data).toBe("cat");
+    await hook2.waitForNextUpdate();
+    // update all same cacheKey cache data
+    expect(hook2.result.current.data).toBe("dog");
+    expect(hook1.result.current.data).toBe("dog");
+
   });
 });

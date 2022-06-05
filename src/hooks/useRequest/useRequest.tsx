@@ -68,9 +68,8 @@ const useRequest = (service: Service, options: Options = {}) => {
     setParams(args);
     return service(...args)
       .then((res) => {
-        setData(res);
         if (cacheKey) {
-          setCache(cacheKey, res);
+          setCache(cacheKey, { data: res, params: args });
           triggerCache(cacheKey);
         }
         return res;

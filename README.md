@@ -39,6 +39,7 @@ And implement following simple but useful custom hooks:
 * useUpdateEffect
 * useGetSet
 * useGetSetState
+* useRequest
 
 Test Library:
 
@@ -50,6 +51,10 @@ Build Library:
 
 * create-react-app: run project in local
 * rollup: generate bundle for production environment
+
+Document:
+
+* [dumi]()
 
 ### Disclaimer
 

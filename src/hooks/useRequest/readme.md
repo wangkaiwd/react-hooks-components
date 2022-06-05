@@ -8,6 +8,6 @@
 * error
 * polling
 * error retry
-* swr
+* swr: subscribe and notify
 * throttle
 * debounce
